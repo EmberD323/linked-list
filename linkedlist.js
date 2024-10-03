@@ -121,5 +121,27 @@ class LinkedList{
         }
         string =+" -> null";
     }
+    insertAt(value,index){
+        //if index is 0 then preend
+        if(index == 0){
+            LinkedList.preend(value);
+            return
+        }
+        //if index is greater than number of items in list then add to end
+        let listLength = size();
+        if(index> listLength){
+            LinkedList.append(value);
+            return
+        }
+        //otherwise slot in
+        //create new node
+        const newNode = new Node(value);
+        //find node current node at that index = nodeAfter
+        let nodeAfter = LinkedList.at(index);
+        //and node before it = nodeBefore
+        let nodeBefore = LinkedList.at(index - 1);
+        newNode.next = nodeAfter;
+        nodeBefore.next = newNode;
+    }
 };
 
