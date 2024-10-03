@@ -46,6 +46,19 @@ class LinkedList{
         while (current.next !== null) {
             count++;
         }
+        return count
+    }
+    headFind(){
+        return this.head
+    }
+    tailFind(){
+        let current = this.head;
+            //search until there is a node with a null next
+            while (current.next !== null) {
+                //move to next node
+                current = current.next;
+            }
+        return current
     }
 };
 
