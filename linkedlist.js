@@ -83,5 +83,32 @@ class LinkedList{
                 current = current.next;
             }
     }
+    contains(valueToFind){
+        let current = this.head;
+        //search while nodes have values
+        while (current.value !== null) {
+            if(current.value == valueToFind){
+                return true
+            }
+            //otherwise move to next node
+            current = current.next;
+        }
+        return false
+    }
+    find(valueToFind){
+        let current = this.head;
+        let index = 0;
+        //search while nodes have values
+        while (current.value !== null) {
+            if(current.value == valueToFind){
+                return index
+            }
+            //otherwise move to next node
+            current = current.next;
+            index++;
+        }
+        return null
+
+    }
 };
 
