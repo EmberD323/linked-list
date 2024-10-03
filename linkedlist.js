@@ -20,14 +20,14 @@ class LinkedList{
         } else {
             //traveses the list until it reaches last node and appends new node
             //start at head
-            let current = this.head;
+            let currentNode = this.head;
             //search until there is a node with a null next
-            while (current.next !== null) {
+            while (currentNode.next !== null) {
                 //move to next node
-                current = current.next;
+                currentNode = currentNode.next;
             }
             //whn the while is finished ie when there is a next = null, add this new node as the next
-            current.next = newNode;
+            currentNode.next = newNode;
         }
     }
     preend(data){
@@ -39,11 +39,11 @@ class LinkedList{
         this.head = newNode;
     }
     size(){
-        let current = this.head;
+        let currentNode = this.head;
         count = 0;
         if (this.head == null) {return count}
         count =1;
-        while (current.next !== null) {
+        while (currentNode.next !== null) {
             count++;
         }
         return count
@@ -52,63 +52,74 @@ class LinkedList{
         return this.head
     }
     tailFind(){
-        let current = this.head;
+        let currentNode = this.head;
             //search until there is a node with a null next
-            while (current.next !== null) {
+            while (currentNode.next !== null) {
                 //move to next node
-                current = current.next;
+                currentNode = currentNode.next;
             }
-        return current
+        return currentNode
     }
     at(index){
         //index 0
         if (index == 0){return this.head}
-        let current = this.head
+        let currentNode = this.head
         //loop across list until index and return node
         for(let i=0;i<index;i++){
-            current = current.next;
+            currentNode = currentNode.next;
         }
-        return current
+        return currentNode
     }
     pop(){
-        let current = this.head;
+        let currentNode = this.head;
             //search while nodes have a next
-            while (current.next !== null) {
-                //if two after current is null then change next node to empty next
-                if(current.next.next == null){
-                    current.next = null;
+            while (currentNode.next !== null) {
+                //if two after currentNode is null then change next node to empty next
+                if(currentNode.next.next == null){
+                    currentNode.next = null;
                     return
                 }
                 //otherwise move to next node
-                current = current.next;
+                currentNode = currentNode.next;
             }
     }
     contains(valueToFind){
-        let current = this.head;
+        let currentNode = this.head;
         //search while nodes have values
-        while (current.value !== null) {
-            if(current.value == valueToFind){
+        while (currentNode.value !== null) {
+            if(currentNode.value == valueToFind){
                 return true
             }
             //otherwise move to next node
-            current = current.next;
+            currentNode = currentNode.next;
         }
         return false
     }
     find(valueToFind){
-        let current = this.head;
+        let currentNode = this.head;
         let index = 0;
         //search while nodes have values
-        while (current.value !== null) {
-            if(current.value == valueToFind){
+        while (currentNode.value !== null) {
+            if(currentNode.value == valueToFind){
                 return index
             }
             //otherwise move to next node
-            current = current.next;
+            currentNode = currentNode.next;
             index++;
         }
         return null
-
+    }
+    toString(){
+        //( value ) -> ( value ) -> ( value ) -> null
+        let string = "( " + this.head+ " )"
+        let currentNode = this.head.next;
+        //search while nodes have values
+        while (currentNode.value !== null) {
+            string =+ " -> ( " + currentNode.value + " )"
+            //otherwise move to next node
+            currentNode = currentNode.next;
+        }
+        string =+" -> null";
     }
 };
 
