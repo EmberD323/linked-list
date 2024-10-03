@@ -30,5 +30,22 @@ class LinkedList{
             current.next = newNode;
         }
     }
+    preend(data){
+        //create node
+        const newNode = new Node(data);
+        //if theres a head already, newNode.next should be that node (works for null too)
+        newNode.next = this.head;
+        //change head reference to this node
+        this.head = newNode;
+    }
+    size(){
+        let current = this.head;
+        count = 0;
+        if (this.head == null) {return count}
+        count =1;
+        while (current.next !== null) {
+            count++;
+        }
+    }
 };
 
