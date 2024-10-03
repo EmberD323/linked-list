@@ -17,6 +17,7 @@ class LinkedList{
         //if list is empty, assign this node to head
         if (this.head == null) {
             this.head = newNode;
+            return
         } else {
             //traveses the list until it reaches last node and appends new node
             //start at head
@@ -40,11 +41,12 @@ class LinkedList{
     }
     size(){
         let currentNode = this.head;
-        count = 0;
-        if (this.head == null) {return count}
+        let count = 0;
+        if (this.head.next == null) {return count}
         count =1;
         while (currentNode.next !== null) {
             count++;
+            currentNode = currentNode.next;
         }
         return count
     }
@@ -66,6 +68,7 @@ class LinkedList{
         let currentNode = this.head
         //loop across list until index and return node
         for(let i=0;i<index;i++){
+            if (currentNode.value==null){return null}
             currentNode = currentNode.next;
         }
         return currentNode
@@ -86,8 +89,8 @@ class LinkedList{
     contains(valueToFind){
         let currentNode = this.head;
         //search while nodes have values
-        while (currentNode.value !== null) {
-            if(currentNode.value == valueToFind){
+        while (currentNode !== null) {
+            if(currentNode.data == valueToFind){
                 return true
             }
             //otherwise move to next node
@@ -99,68 +102,53 @@ class LinkedList{
         let currentNode = this.head;
         let index = 0;
         //search while nodes have values
-        while (currentNode.value !== null) {
-            if(currentNode.value == valueToFind){
+        while (currentNode.data !== null) {
+            if(currentNode.data == valueToFind){
                 return index
             }
+            if (currentNode.next==null){return null}
             //otherwise move to next node
             currentNode = currentNode.next;
             index++;
         }
-        return null
     }
     toString(){
         //( value ) -> ( value ) -> ( value ) -> null
-        let string = "( " + this.head+ " )"
+        let string = "( " + this.head.data+ " )"
         let currentNode = this.head.next;
         //search while nodes have values
-        while (currentNode.value !== null) {
-            string =+ " -> ( " + currentNode.value + " )"
+        while (currentNode !== null) {
+            string = string + " -> ( " + currentNode.data + " )"
             //otherwise move to next node
             currentNode = currentNode.next;
         }
-        string =+" -> null";
+        string = string + " -> null";
+        return string
     }
     insertAt(value,index){
+        const newNode = new Node(value)
         //if index is 0 then preend
         if(index == 0){
-            LinkedList.preend(value);
-            return
-        }
-        //if index is greater than number of items in list then add to end
-        let listLength = size();
-        if(index> listLength-1){
-            LinkedList.append(value);
+            newNode.next = this.head;
+            this.head = newNode;
             return
         }
         //otherwise slot in
-        //create new node
-        const newNode = new Node(value);
         //find node current node at that index = nodeAfter
-        let nodeAfter = LinkedList.at(index);
-        //and node before it = nodeBefore
-        let nodeBefore = LinkedList.at(index - 1);
+        let currentNode = this.head
+        for(let i=1;i<index;i++){
+            console.log("i is "+i);
+            currentNode = currentNode.next;
+            if (currentNode.next==null){break}
+        }
+        console.log(currentNode);
+        let nodeAfter = currentNode.next;
+        let nodeBefore = currentNode;
         newNode.next = nodeAfter;
         nodeBefore.next = newNode;
     }
-    removeAt(index){
-        let listLength = size();
-        if(index > listLength-1){
-            return
-        }
-        //if index is last in array
-        if(index == listLength-1){
-            LinkedList.pop();
-            return
-        }
-        let nodeAfter = LinkedList.at(index+1)
-        //if index = head
-        if(index == 0){
-            this.head = nodeAfter;
-            return
-        }
-        let nodeBefore = LinkedList.at(index-1);
-        nodeBefore.next = nodeAfter;
-    }
-};
+   
+}
+
+export {Node,LinkedList}
 
