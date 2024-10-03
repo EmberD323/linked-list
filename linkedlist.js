@@ -129,7 +129,7 @@ class LinkedList{
         }
         //if index is greater than number of items in list then add to end
         let listLength = size();
-        if(index> listLength){
+        if(index> listLength-1){
             LinkedList.append(value);
             return
         }
@@ -142,6 +142,25 @@ class LinkedList{
         let nodeBefore = LinkedList.at(index - 1);
         newNode.next = nodeAfter;
         nodeBefore.next = newNode;
+    }
+    removeAt(index){
+        let listLength = size();
+        if(index > listLength-1){
+            return
+        }
+        //if index is last in array
+        if(index == listLength-1){
+            LinkedList.pop();
+            return
+        }
+        let nodeAfter = LinkedList.at(index+1)
+        //if index = head
+        if(index == 0){
+            this.head = nodeAfter;
+            return
+        }
+        let nodeBefore = LinkedList.at(index-1);
+        nodeBefore.next = nodeAfter;
     }
 };
 
