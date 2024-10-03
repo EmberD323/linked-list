@@ -60,5 +60,28 @@ class LinkedList{
             }
         return current
     }
+    at(index){
+        //index 0
+        if (index == 0){return this.head}
+        let current = this.head
+        //loop across list until index and return node
+        for(let i=0;i<index;i++){
+            current = current.next;
+        }
+        return current
+    }
+    pop(){
+        let current = this.head;
+            //search while nodes have a next
+            while (current.next !== null) {
+                //if two after current is null then change next node to empty next
+                if(current.next.next == null){
+                    current.next = null;
+                    return
+                }
+                //otherwise move to next node
+                current = current.next;
+            }
+    }
 };
 
